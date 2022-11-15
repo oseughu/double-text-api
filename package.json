@@ -1,0 +1,38 @@
+{
+  "name": "double-text",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*.js",
+    "#utils/*": "./src/utils/*.js",
+    "#controllers/*": "./src/controllers/*.js",
+    "#middleware/*": "./src/middleware/*.js",
+    "#models/*": "./src/models/*.js",
+    "#routes": "./src/routes/index.js",
+    "#routes/*": "./src/routes/*.js"
+  },
+  "scripts": {
+    "dev": "nodemon src/app",
+    "start": "node src/app"
+  },
+  "keywords": [],
+  "author": "Ose Ughu",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.4",
+    "mongoose-autopopulate": "^0.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
