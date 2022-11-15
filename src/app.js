@@ -25,7 +25,8 @@ app.use(
       'http://localhost:5174',
       'http://localhost:8080',
       'http://localhost:3000',
-      'http://localhost:5000'
+      'http://localhost:5000',
+      process.env.CLIENT_URL
     ],
     credentials: true
   })
