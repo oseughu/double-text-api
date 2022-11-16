@@ -13,12 +13,24 @@ const app = express()
 // connect to the database
 connectDb()
 
-app.use(cors())
-
 //To parse the body of the request
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:8080',
+      'http://localhost:3000',
+      'http://localhost:5000',
+      process.env.CLIENT_URL
+    ],
+    credentials: true
+  })
+)
 
 app.use(errorHandler)
 
