@@ -39,8 +39,8 @@ export const addReply = asyncHandler(async (req, res) => {
   res.status(201).json({ reply })
 })
 
-export const deleteCommentOrReply = asyncHandler(async (req, res) => {
-  const { commentId, id } = req.params
+export const deleteComment = asyncHandler(async (req, res) => {
+  const { commentId } = req.params
 
   const comment = Comment.findById(commentId)
 
@@ -49,7 +49,7 @@ export const deleteCommentOrReply = asyncHandler(async (req, res) => {
     throw new Error('Unauthorized.')
   }
 
-  await Comment.findOneAndDelete({ _id: commentId, post: id })
+  await Comment.findByIdAndDelete(commentId)
 
   res.json('comment deleted successfully')
 })
