@@ -52,6 +52,9 @@ export const upVote = asyncHandler(async (req, res, next) => {
     await post.save()
     res.status(204).json()
   } else {
+    post.upVotes.pop(user._id)
+    post.voteScore--
+    await post.save()
     res.status(204).json()
   }
 })
@@ -73,6 +76,9 @@ export const downVote = asyncHandler(async (req, res, next) => {
     await post.save()
     res.status(204).json()
   } else {
+    post.downVotes.pop(user._id)
+    post.voteScore++
+    await post.save()
     res.status(204).json()
   }
 })
