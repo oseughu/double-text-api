@@ -42,7 +42,7 @@ export const login = asyncHandler(async (req, res) => {
   res.cookie('jwt', token, {
     httpOnly: true,
     signed: true,
-    sameSite: 'none',
+    sameSite: false,
     secure: true,
     maxAge: 24 * 60 * 60 * 100
   })
@@ -55,6 +55,6 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 export const logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 0, httpOnly: true, signed: true, sameSite: 'none', secure: true })
+  res.cookie('jwt', '', { maxAge: 0, sameSite: false })
   res.json('successfully logged out.')
 }
