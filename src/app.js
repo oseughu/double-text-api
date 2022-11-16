@@ -3,6 +3,7 @@ import routes from '#routes'
 import connectDb from '#utils/db'
 import colors from 'colors'
 // import cookieParser from 'cookie-parser'
+import MongoStore from 'connect-mongo'
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
@@ -26,6 +27,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: process.env.SECRET,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       maxAge: 1000 * 60 * 60,
       sameSite: 'none',
