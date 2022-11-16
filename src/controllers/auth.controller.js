@@ -39,10 +39,6 @@ export const login = asyncHandler(async (req, res) => {
 
   const token = jwt.sign({ id: user._id }, process.env.SECRET)
 
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-  res.header('Access-Control-Allow-Credentials', true)
-
   res.cookie('jwt', token, {
     httpOnly: true,
     signed: true,
@@ -51,7 +47,7 @@ export const login = asyncHandler(async (req, res) => {
     maxAge: 24 * 60 * 60 * 100
   })
 
-  res.json({ token })
+  res.send()
 })
 
 export const authUser = asyncHandler(async (req, res) => {
@@ -59,6 +55,6 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 export const logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 0, sameSite: false })
-  res.json('successfully logged out.')
+  res.cookie('jwt', '', { maxAge: 0, sameSite: false, secure: true })
+  res.send()
 }
