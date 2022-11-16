@@ -39,15 +39,9 @@ export const login = asyncHandler(async (req, res) => {
 
   const token = jwt.sign({ id: user._id }, process.env.SECRET)
 
-  res.cookie('jwt', token, {
-    httpOnly: true,
-    signed: true,
-    sameSite: false,
-    secure: true,
-    maxAge: 24 * 60 * 60 * 100
-  })
+  req.session.jwt = token
 
-  res.send()
+  res.send({ message: 'logged in successfully' })
 })
 
 export const authUser = asyncHandler(async (req, res) => {
@@ -55,6 +49,6 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 export const logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 0, sameSite: false, secure: true })
-  res.send()
+  res.session.jwt = ''
+  res.send({ message: 'logged out successfully' })
 }
