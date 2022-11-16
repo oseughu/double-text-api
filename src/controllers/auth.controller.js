@@ -46,7 +46,6 @@ export const login = asyncHandler(async (req, res) => {
     secure: true,
     maxAge: 24 * 60 * 60 * 100
   })
-  // res.send()
 
   res.json({ token })
 })
@@ -56,6 +55,6 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 export const logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 0 })
+  res.cookie('jwt', '', { maxAge: 0, httpOnly: true, signed: true, sameSite: 'none', secure: true })
   res.json('successfully logged out.')
 }
