@@ -41,7 +41,7 @@ export const login = asyncHandler(async (req, res) => {
 
   res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 100 })
 
-  res.json({ token })
+  res.send()
 })
 
 export const authUser = asyncHandler(async (req, res) => {
