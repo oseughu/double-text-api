@@ -3,6 +3,7 @@ import routes from '#routes'
 import connectDb from '#utils/db'
 import colors from 'colors'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
 
@@ -11,6 +12,8 @@ const app = express()
 
 // connect to the database
 connectDb()
+
+app.use(cors())
 
 //To parse the body of the request
 app.use(express.urlencoded({ extended: true }))
