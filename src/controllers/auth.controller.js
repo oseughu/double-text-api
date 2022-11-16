@@ -39,9 +39,10 @@ export const login = asyncHandler(async (req, res) => {
 
   const token = jwt.sign({ id: user._id }, process.env.SECRET)
 
-  res.cookie('jwt', token, { httpOnly: false, maxAge: 24 * 60 * 60 * 100 })
-
+  res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 100 })
   res.send()
+
+  res.json({ token })
 })
 
 export const authUser = asyncHandler(async (req, res) => {
