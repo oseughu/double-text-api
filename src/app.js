@@ -2,7 +2,6 @@ import errorHandler from '#middleware/error'
 import routes from '#routes'
 import connectDb from '#utils/db'
 import colors from 'colors'
-// import cookieParser from 'cookie-parser'
 import MongoStore from 'connect-mongo'
 import cors from 'cors'
 import 'dotenv/config'
@@ -18,7 +17,6 @@ connectDb()
 //To parse the body of the request
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-// app.use(cookieParser())
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
 

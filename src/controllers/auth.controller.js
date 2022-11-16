@@ -49,6 +49,6 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 export const logout = (req, res) => {
-  res.session.jwt = ''
+  req.session.destroy()
   res.send({ message: 'logged out successfully' })
 }
