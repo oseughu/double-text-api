@@ -12,6 +12,7 @@ const commentSchema = new Schema(
       required: true,
       autopopulate: true
     },
+    post: { type: Schema.Types.ObjectId, ref: 'Post', autopopulate: true },
     replies: [{ type: Schema.Types.ObjectId, ref: 'Comment', autopopulate: true }]
   },
   { timestamps: true }

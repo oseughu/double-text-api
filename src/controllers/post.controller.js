@@ -82,3 +82,19 @@ export const downVote = asyncHandler(async (req, res, next) => {
     res.status(204).json()
   }
 })
+
+export const deletePost = asyncHandler(async (req, res) => {
+  const { id } = req.params
+
+  const post = await Post.findById(id)
+
+  if (req.user._id !== post.author._id) {
+    res.status(401)
+    throw new Error('Unauthorized.')
+  }
+
+  await Comment.deleteMany({ post: post._id })
+  await Post.findByIdAndDelete(id)
+
+  res.json('post successfully deleted')
+})
