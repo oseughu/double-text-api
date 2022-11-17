@@ -27,7 +27,7 @@ app.use(
     secret: process.env.SECRET,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-      maxAge: 1000 * 60 * 60,
+      maxAge: 24 * 60 * 60 * 100,
       sameSite: 'none',
       secure: true
     }
