@@ -48,7 +48,7 @@ export const authUser = asyncHandler(async (req, res) => {
   res.json(req.user)
 })
 
-export const logout = (req, res) => {
+export const logout = asyncHandler(async (req, res) => {
   req.session.destroy()
   res.send({ message: 'logged out successfully' })
-}
+})
