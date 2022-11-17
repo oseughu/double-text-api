@@ -45,17 +45,17 @@ export const upVote = asyncHandler(async (req, res, next) => {
     post.upVotes.push(user._id)
     post.voteScore++
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   } else if (!post.upVotes.includes(user._id)) {
     post.upVotes.push(user._id)
     post.voteScore++
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   } else {
     post.upVotes.pop(user._id)
     post.voteScore--
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   }
 })
 
@@ -69,17 +69,17 @@ export const downVote = asyncHandler(async (req, res, next) => {
     post.downVotes.push(user._id)
     post.voteScore--
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   } else if (!post.downVotes.includes(user._id)) {
     post.downVotes.push(user._id)
     post.voteScore--
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   } else {
     post.downVotes.pop(user._id)
     post.voteScore++
     await post.save()
-    res.status(204).json()
+    res.sendStatus(204)
   }
 })
 
@@ -98,7 +98,7 @@ export const deletePost = async (req, res) => {
       if (err) {
         console.log(err)
       } else {
-        res.status(204).json(result)
+        res.sendStatus(204)
       }
     })
   } catch (error) {

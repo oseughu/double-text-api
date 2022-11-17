@@ -18,6 +18,7 @@ const corsOptions = {
   origin: process.env.CLIENT_URL,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   optionsSuccessStatus: 200,
+  preflightContinue: true,
   credentials: true
 }
 
