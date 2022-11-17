@@ -87,8 +87,9 @@ export const deletePost = asyncHandler(async (req, res) => {
   const { id } = req.params
 
   const post = await Post.findById(id)
+  const user = await User.findById(req.user._id)
 
-  if (req.user._id !== post.author._id) {
+  if (user._id !== post.author._id) {
     res.status(401)
     throw new Error('Unauthorized.')
   }

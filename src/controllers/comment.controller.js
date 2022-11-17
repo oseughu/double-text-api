@@ -1,5 +1,6 @@
 import Comment from '#models/comment.model'
 import Post from '#models/post.model'
+import User from '#models/user.model'
 import asyncHandler from 'express-async-handler'
 
 export const addComment = asyncHandler(async (req, res) => {
@@ -43,8 +44,9 @@ export const deleteComment = asyncHandler(async (req, res) => {
   const { commentId } = req.params
 
   const comment = Comment.findById(commentId)
+  const user = User.findById(req.user._id)
 
-  if (req.user._id !== comment.author._id) {
+  if (user._id !== comment.author._id) {
     res.status(401)
     throw new Error('Unauthorized.')
   }
