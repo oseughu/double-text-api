@@ -39,7 +39,7 @@ export const addReply = asyncHandler(async (req, res) => {
   res.status(201).json({ reply })
 })
 
-export const deleteComment = async (req, res) => {
+export const deleteComment = async (req, res, next) => {
   try {
     const { id, commentId } = req.params
 
@@ -58,6 +58,8 @@ export const deleteComment = async (req, res) => {
         res.sendStatus(204)
       }
     })
+
+    next()
   } catch (error) {
     console.log(error)
   }

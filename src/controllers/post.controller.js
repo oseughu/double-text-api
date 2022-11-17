@@ -83,7 +83,7 @@ export const downVote = asyncHandler(async (req, res, next) => {
   }
 })
 
-export const deletePost = async (req, res) => {
+export const deletePost = async (req, res, next) => {
   try {
     const { id } = req.params
 
@@ -101,6 +101,8 @@ export const deletePost = async (req, res) => {
         res.sendStatus(204)
       }
     })
+
+    next()
   } catch (error) {
     console.log(error)
   }
