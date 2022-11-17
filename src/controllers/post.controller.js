@@ -93,7 +93,11 @@ export const deletePost = asyncHandler(async (req, res) => {
     throw new Error('Unauthorized.')
   }
 
-  await Post.findOneAndRemove({ _id: id })
+  await Post.findOneAndRemove({ _id: id }, (err, response) => {
+    if (err) {
+      console.log(err)
+    }
+  })
 
   res.status(204).json()
 })

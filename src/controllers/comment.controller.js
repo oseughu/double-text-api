@@ -50,7 +50,11 @@ export const deleteComment = asyncHandler(async (req, res) => {
     throw new Error('Unauthorized.')
   }
 
-  await Comment.findOneAndRemove({ _id: id })
+  await Comment.findOneAndRemove({ _id: id }, (err, response) => {
+    if (err) {
+      console.log(err)
+    }
+  })
 
   res.status(204).json()
 })
