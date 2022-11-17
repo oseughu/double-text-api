@@ -35,7 +35,7 @@ export const addPost = asyncHandler(async (req, res) => {
   res.status(201).json(post)
 })
 
-export const upVote = asyncHandler(async (req, res, next) => {
+export const upVote = asyncHandler(async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
   const user = await User.findById(req.user._id)
@@ -59,7 +59,7 @@ export const upVote = asyncHandler(async (req, res, next) => {
   }
 })
 
-export const downVote = asyncHandler(async (req, res, next) => {
+export const downVote = asyncHandler(async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
   const user = await User.findById(req.user._id)
@@ -83,7 +83,7 @@ export const downVote = asyncHandler(async (req, res, next) => {
   }
 })
 
-export const deletePost = async (req, res, next) => {
+export const deletePost = async (req, res) => {
   try {
     const { id } = req.params
 
