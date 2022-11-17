@@ -52,13 +52,7 @@ export const deleteComment = asyncHandler(async (req, res) => {
     throw new Error('Unauthorized.')
   }
 
-  await Comment.deleteMany({
-    _id: {
-      $in: comment.replies
-    }
-  })
-
-  await Comment.findByIdAndDelete(commentId)
+  await Comment.findOneAndRemove({ _id: id })
 
   res.status(204).json()
 })

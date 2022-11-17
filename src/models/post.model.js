@@ -1,7 +1,12 @@
+import Comment from '#models/comment.model'
 import mongoose from 'mongoose'
 import mongooseAutoPopulate from 'mongoose-autopopulate'
 
 const { Schema, model } = mongoose
+
+function removedLinkedDocuments(doc) {
+  Comment.remove({ _id: { $in: doc.comments } })
+}
 
 const postSchema = new Schema(
   {
@@ -24,6 +29,8 @@ const postSchema = new Schema(
 )
 
 postSchema.plugin(mongooseAutoPopulate)
+
+postSchema.post('remove', removedLinkedDocuments)
 
 const Post = model('Post', postSchema)
 

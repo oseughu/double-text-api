@@ -1,8 +1,13 @@
+import Post from '#models/post.model'
 import bcrypt from 'bcryptjs'
 import mongoose from 'mongoose'
 import mongooseAutoPopulate from 'mongoose-autopopulate'
 
 const { Schema, model } = mongoose
+
+async function removedLinkedDocuments(doc) {
+  Post.remove({ _id: { $in: doc.posts } })
+}
 
 const userSchema = new Schema(
   {
@@ -22,6 +27,8 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt)
   next()
 })
+
+userSchema.post('remove', removedLinkedDocuments)
 
 const User = model('User', userSchema)
 
