@@ -60,5 +60,5 @@ export const deleteComment = asyncHandler(async (req, res) => {
 
   await Comment.findByIdAndDelete(commentId)
 
-  res.json('comment deleted successfully')
+  res.status(204).json()
 })

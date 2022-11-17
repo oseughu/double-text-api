@@ -102,5 +102,5 @@ export const deletePost = asyncHandler(async (req, res) => {
 
   await Post.findByIdAndDelete(id)
 
-  res.json('post successfully deleted')
+  res.status(204).json()
 })
