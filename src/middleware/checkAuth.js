@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 const checkAuth = asyncHandler(async (req, res, next) => {
   const cookie = req.session.jwt
 
-  if (!cookie || cookie === '') {
+  if (!cookie) {
     res.status(401).json({ error: 'User not authorized.' })
   }
 
