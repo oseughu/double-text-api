@@ -6,14 +6,14 @@ import jwt from 'jsonwebtoken'
 export const register = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body
 
-  const alreadyExists = await User.findOne({ email })
+  const alreadyExists = await User.findOne({ email: email.toLowerCase() })
 
   if (alreadyExists) {
     res.status(400)
     throw new Error('User already exists.')
   }
 
-  const newUser = new User({ name, email, password })
+  const newUser = new User({ name, email: email.toLowerCase(), password })
 
   await newUser.save()
 
@@ -23,7 +23,7 @@ export const register = asyncHandler(async (req, res, next) => {
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({ email }).select('+password')
+  const user = await User.findOne({ email: email.toLowerCase() }).select('+password')
 
   if (!user) {
     res.status(404)
