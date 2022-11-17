@@ -22,8 +22,9 @@ commentSchema.plugin(mongooseAutoPopulate)
 
 const Comment = model('Comment', commentSchema)
 
-function removedLinkedDocuments(doc) {
+function removedLinkedDocuments(doc, next) {
   Comment.remove({ _id: { $in: doc.replies } })
+  next()
 }
 
 commentSchema.post('remove', removedLinkedDocuments)
