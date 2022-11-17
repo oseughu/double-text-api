@@ -38,12 +38,6 @@ app.set('trust proxy', 1)
 
 app.use(errorHandler)
 
-app.use('/api', routes)
-
-app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to the Double Text API.' })
-})
-
 app.all('/*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', req.headers.origin)
   res.header('Access-Control-Allow-Credentials', true)
@@ -57,6 +51,12 @@ app.all('/*', function (req, res, next) {
   } else {
     next()
   }
+})
+
+app.use('/api', routes)
+
+app.get('/', (req, res) => {
+  res.json({ msg: 'Welcome to the Double Text API.' })
 })
 
 app.listen(port, () => {
