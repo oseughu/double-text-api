@@ -39,22 +39,22 @@ export const addReply = asyncHandler(async (req, res) => {
   res.status(201).json({ reply })
 })
 
-export const deleteComment = asyncHandler(async (req, res) => {
-  const { id, commentId } = req.params
+export const deleteComment = async (req, res) => {
+  try {
+    const { id, commentId } = req.params
 
-  const post = await Post.findById(id)
-  const comment = await Comment.findById(commentId)
+    const post = await Post.findById(id)
+    const comment = await Comment.findById(commentId)
 
-  if (req.user._id !== comment.author._id && req.user._id !== post.author._id) {
-    res.status(401)
-    throw new Error('Unauthorized.')
-  }
-
-  await Comment.findOneAndRemove({ _id: id }, (err, response) => {
-    if (err) {
-      console.log(err)
+    if (req.user._id !== comment.author._id && req.user._id !== post.author._id) {
+      res.status(401)
+      throw new Error('Unauthorized.')
     }
-  })
 
-  res.status(204).json()
-})
+    await Comment.findOneAndRemove({ _id: id })
+
+    res.status(204).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
