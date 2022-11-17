@@ -51,9 +51,13 @@ export const deleteComment = async (req, res) => {
       throw new Error('Unauthorized.')
     }
 
-    await Comment.findOneAndRemove({ _id: id })
-
-    res.status(204).json()
+    Comment.findOneAndRemove({ _id: id }, (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.status(204).json(result)
+      }
+    })
   } catch (error) {
     console.log(error)
   }
