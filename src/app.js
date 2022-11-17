@@ -16,9 +16,7 @@ connectDb()
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   optionsSuccessStatus: 200,
-  preflightContinue: true,
   credentials: true
 }
 
@@ -43,7 +41,7 @@ app.use(
   })
 )
 
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 
 app.use(errorHandler)
 

@@ -55,7 +55,7 @@ export const deleteComment = async (req, res) => {
       if (err) {
         console.log(err)
       } else {
-        res.status(204).json(result)
+        res.sendStatus(204)
       }
     })
   } catch (error) {
