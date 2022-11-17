@@ -101,8 +101,6 @@ export const deletePost = async (req, res, next) => {
         res.sendStatus(204)
       }
     })
-
-    next()
   } catch (error) {
     console.log(error)
   }

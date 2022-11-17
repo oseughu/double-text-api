@@ -13,7 +13,9 @@ const app = express()
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
-  optionsSuccessStatus: 200,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
   credentials: true
 }
 
