@@ -14,13 +14,18 @@ const app = express()
 // connect to the database
 connectDb()
 
-const corsOptions = { origin: process.env.CLIENT_URL, optionsSuccessStatus: 200, credentials: true }
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200,
+  credentials: true
+}
 
 //To parse the body of the request
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.options('*', cors(corsOptions))
+app.options('*', cors())
 app.use(cors(corsOptions))
 
 app.use(
