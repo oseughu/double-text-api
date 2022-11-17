@@ -11,6 +11,9 @@ import session from 'express-session'
 const port = process.env.PORT || 9000
 const app = express()
 
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
+
 // connect to the database
 connectDb()
 
@@ -23,9 +26,6 @@ const corsOptions = {
 //To parse the body of the request
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
-app.options('*', cors(corsOptions))
-app.use(cors(corsOptions))
 
 app.use(
   session({
