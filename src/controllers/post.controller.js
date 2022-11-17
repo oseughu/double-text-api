@@ -94,7 +94,12 @@ export const deletePost = asyncHandler(async (req, res) => {
     throw new Error('Unauthorized.')
   }
 
-  await Comment.deleteMany({ post: post._id })
+  await Comment.deleteMany({
+    _id: {
+      $in: post.comments
+    }
+  })
+
   await Post.findByIdAndDelete(id)
 
   res.json('post successfully deleted')

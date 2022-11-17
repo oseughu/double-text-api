@@ -41,15 +41,22 @@ export const addReply = asyncHandler(async (req, res) => {
 })
 
 export const deleteComment = asyncHandler(async (req, res) => {
-  const { commentId } = req.params
+  const { id, commentId } = req.params
 
-  const comment = Comment.findById(commentId)
-  const user = User.findById(req.user._id)
+  const post = await Post.findById(id)
+  const comment = await Comment.findById(commentId)
+  const user = await User.findById(req.user._id)
 
-  if (user._id !== comment.author._id) {
+  if (user._id !== comment.author._id && user._id !== post.author._id) {
     res.status(401)
     throw new Error('Unauthorized.')
   }
+
+  await Comment.deleteMany({
+    _id: {
+      $in: comment.replies
+    }
+  })
 
   await Comment.findByIdAndDelete(commentId)
 

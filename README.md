@@ -13,6 +13,8 @@ This project was built to test my skills on linking a fully functional client si
 
 ## Todo
 
-[] Edit comments
-[] Edit posts
-[] Edit replies
+- [ ] Edit comments
+
+- [ ] Edit posts
+
+- [ ] Edit replies
