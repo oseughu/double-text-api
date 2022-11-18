@@ -16,6 +16,6 @@ postRouter.get('/posts/:id', getPost)
 postRouter.post('/posts/new', checkAuth, addPost)
 postRouter.put('/posts/:id/vote-up', checkAuth, upVote)
 postRouter.put('/posts/:id/vote-down', checkAuth, downVote)
-postRouter.delete('/posts/:id/delete', checkAuth, deletePost)
+postRouter.delete('/posts/:id', checkAuth, deletePost)
 
 export default postRouter

@@ -6,7 +6,7 @@ const commentRouter = Router()
 
 commentRouter.post('/posts/:id/comments', checkAuth, addComment)
 commentRouter.get('/posts/:id/comments/:commentId/', getComment)
-commentRouter.delete('/posts/:id/comments/:commentId/delete', checkAuth, deleteComment)
+commentRouter.delete('/posts/:id/comments/:commentId', checkAuth, deleteComment)
 commentRouter.post('/posts/:id/comments/:commentId/replies/new', checkAuth, addReply)
 
 export default commentRouter
