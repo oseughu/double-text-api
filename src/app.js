@@ -45,7 +45,7 @@ app.use(
 
 app.set('trust proxy', 1)
 
-app.use(errorHandler)
+// app.use(errorHandler)
 
 app.use('/api', routes)
 
