@@ -39,19 +39,17 @@ export const addReply = asyncHandler(async (req, res) => {
   res.status(201).json({ reply })
 })
 
-export const deleteComment = async (req, res, next) => {
+export const deleteComment = async (req, res) => {
   try {
     const { id, commentId } = req.params
 
     const post = await Post.findById(id)
     const comment = await Comment.findById(commentId)
-
-    if (req.user._id !== comment.author._id && req.user._id !== post.author._id) {
-      res.status(401)
-      throw new Error('Unauthorized.')
-    }
-
     const replies = await Comment.find({ _id: comment.replies._id })
+
+    if (req.user.email !== comment.author.email && req.user.email !== post.author.email) {
+      res.status(401).json({ message: 'user not authorized.' })
+    }
 
     replies.forEach((comment) => {
       Comment.findByIdAndDelete(comment._id)
@@ -60,15 +58,7 @@ export const deleteComment = async (req, res, next) => {
     await Comment.findByIdAndDelete(commentId)
 
     res.sendStatus(204)
-
-    // Comment.findOneAndRemove({ _id: commentId }, (err, result) => {
-    //   if (err) {
-    //     console.log(err)
-    //   } else {
-    //     res.sendStatus(204)
-    //   }
-    // })
   } catch (error) {
-    console.log(error)
+    res.status(500).json({ message: 'something went wrong.' })
   }
 }

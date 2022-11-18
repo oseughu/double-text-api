@@ -13,9 +13,6 @@ const app = express()
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
   credentials: true
 }
 
@@ -38,14 +35,14 @@ app.use(
     cookie: {
       maxAge: 24 * 60 * 60 * 100,
       sameSite: 'none',
-      secure: true
+      secure: process.env.NODE_ENV === 'development' ? false : true
     }
   })
 )
 
 app.set('trust proxy', 1)
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 app.use('/api', routes)
 

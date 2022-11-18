@@ -88,11 +88,10 @@ export const deletePost = async (req, res) => {
   try {
     const { id } = req.params
 
-    const post = await Post.findById(id)
+    const post = await Post.findOne({ _id: id })
 
-    if (req.user._id !== post.author._id) {
-      res.status(401)
-      throw new Error('Unauthorized.')
+    if (req.user.email !== post.author.email) {
+      res.status(401).json({ message: 'user not authorized.' })
     }
 
     const comments = await Comment.find({ _id: post.comments._id })
@@ -104,15 +103,7 @@ export const deletePost = async (req, res) => {
     await Post.findByIdAndDelete(id)
 
     res.sendStatus(204)
-
-    // Post.findOneAndRemove({ _id: id }, (err, result) => {
-    //   if (err) {
-    //     console.log(err)
-    //   } else {
-    //     res.sendStatus(204)
-    //   }
-    // })
   } catch (error) {
-    console.log(error)
+    res.status(500).json({ message: 'something went wrong.' })
   }
 }
