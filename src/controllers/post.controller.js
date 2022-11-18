@@ -1,3 +1,4 @@
+import Comment from '#models/comment.model'
 import Post from '#models/post.model'
 import User from '#models/user.model'
 import asyncHandler from 'express-async-handler'
