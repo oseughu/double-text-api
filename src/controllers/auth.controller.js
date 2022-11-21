@@ -19,7 +19,7 @@ export const register = asyncHandler(async (req, res, next) => {
 
   await newUser.save()
 
-  res.json({ _id: newUser._id, name: newUser.name, email: newUser.email })
+  res.status(201).json({ _id: newUser._id, name: newUser.name, email: newUser.email })
 })
 
 export const login = asyncHandler(async (req, res) => {
