@@ -45,17 +45,17 @@ export const deleteComment = async (req, res) => {
 
     const post = await Post.findById(id)
     const comment = await Comment.findById(commentId)
-    const replies = await Comment.find({ _id: comment.replies._id })
+    // const replies = await Comment.find({ _id: comment.replies._id })
 
     if (req.user.email !== comment.author.email && req.user.email !== post.author.email) {
       res.status(401).json({ message: 'user not authorized.' })
     }
 
-    replies.forEach((comment) => {
-      Comment.findByIdAndDelete(comment._id)
-    })
+    // replies.forEach((comment) => {
+    //   Comment.findByIdAndDelete(comment._id)
+    // })
 
-    await Comment.findByIdAndDelete(commentId)
+    await Comment.findOneAndRemove({ _id: commentId })
 
     res.sendStatus(204)
   } catch (error) {

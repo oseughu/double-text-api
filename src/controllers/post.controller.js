@@ -94,13 +94,13 @@ export const deletePost = async (req, res) => {
       res.status(401).json({ message: 'user not authorized.' })
     }
 
-    const comments = await Comment.find({ _id: post.comments._id })
+    // const comments = await Comment.find({ _id: post.comments._id })
 
-    comments.forEach((comment) => {
-      Comment.findByIdAndDelete(comment._id)
-    })
+    // comments.forEach((comment) => {
+    //   Comment.findByIdAndDelete(comment._id)
+    // })
 
-    await Post.findByIdAndDelete(id)
+    await Post.findOneAndRemove({ _id: id })
 
     res.sendStatus(204)
   } catch (error) {

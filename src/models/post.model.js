@@ -26,6 +26,11 @@ const postSchema = new Schema(
 
 postSchema.plugin(mongooseAutoPopulate)
 
+postSchema.post('remove', async function (doc, next) {
+  await Comment.remove({ _id: { $in: doc.comments } })
+  next()
+})
+
 const Post = model('Post', postSchema)
 
 export default Post

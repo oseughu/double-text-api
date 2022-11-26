@@ -56,21 +56,21 @@ export const logout = asyncHandler(async (req, res) => {
 })
 
 export const deleteUser = asyncHandler(async (req, res) => {
-  const { _id } = req.user
+  const { email } = req.user
 
-  const user = await User.findById(_id)
-  const posts = await Post.find({ _id: user.posts._id })
-  const comments = await Comment.find({ _id: user.comments._id })
+  // const user = await User.findById(_id)
+  // const posts = await Post.find({ _id: user.posts._id })
+  // const comments = await Comment.find({ _id: user.comments._id })
 
-  posts.forEach((post) => {
-    Post.findByIdAndDelete(post._id)
-  })
+  // posts.forEach((post) => {
+  //   Post.findByIdAndDelete(post._id)
+  // })
 
-  comments.forEach((comment) => {
-    Comment.findByIdAndDelete(comment._id)
-  })
+  // comments.forEach((comment) => {
+  //   Comment.findByIdAndDelete(comment._id)
+  // })
 
-  await User.findByIdAndDelete(id)
+  await User.findOneAndRemove({ email })
 
   res.sendStatus(204)
 })

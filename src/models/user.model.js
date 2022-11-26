@@ -1,3 +1,4 @@
+import Comment from '#models/comment.model'
 import Post from '#models/post.model'
 import bcrypt from 'bcryptjs'
 import mongoose from 'mongoose'
@@ -21,6 +22,12 @@ userSchema.plugin(mongooseAutoPopulate)
 userSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
+  next()
+})
+
+userSchema.post('remove', async function (doc, next) {
+  await Post.remove({ _id: { $in: doc.posts } })
+  await Comment.remove({ _id: { $in: doc.comments } })
   next()
 })
 
