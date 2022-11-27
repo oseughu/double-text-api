@@ -18,12 +18,12 @@ const commentSchema = new Schema(
   { timestamps: true }
 )
 
-commentSchema.plugin(mongooseAutoPopulate)
-
-const Comment = model('Comment', commentSchema)
-
 commentSchema.post('remove', function (doc) {
   Comment.remove({ _id: { $in: doc.replies } })
 })
+
+commentSchema.plugin(mongooseAutoPopulate)
+
+const Comment = model('Comment', commentSchema)
 
 export default Comment

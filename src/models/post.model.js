@@ -24,11 +24,11 @@ const postSchema = new Schema(
   }
 )
 
-postSchema.plugin(mongooseAutoPopulate)
-
 postSchema.post('remove', function (doc) {
   Comment.remove({ _id: { $in: doc.comments } })
 })
+
+postSchema.plugin(mongooseAutoPopulate)
 
 const Post = model('Post', postSchema)
 

@@ -17,8 +17,6 @@ const userSchema = new Schema(
   { timestamps: true }
 )
 
-userSchema.plugin(mongooseAutoPopulate)
-
 userSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
@@ -36,6 +34,8 @@ userSchema.post('remove', function (doc, next) {
   Comment.remove({ _id: { $in: doc.comments } })
   next()
 })
+
+userSchema.plugin(mongooseAutoPopulate)
 
 const User = model('User', userSchema)
 
