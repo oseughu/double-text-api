@@ -25,9 +25,16 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-userSchema.post('remove', async function (doc) {
-  await Post.remove({ _id: { $in: doc.posts } })
-  await Comment.remove({ _id: { $in: doc.comments } })
+userSchema.post('remove', function (doc, next) {
+  setTimeout(function () {
+    Post.remove({ _id: { $in: doc.posts } })
+    next()
+  }, 10)
+})
+
+userSchema.post('remove', function (doc, next) {
+  Comment.remove({ _id: { $in: doc.comments } })
+  next()
 })
 
 const User = model('User', userSchema)

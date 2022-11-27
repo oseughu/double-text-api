@@ -22,8 +22,8 @@ commentSchema.plugin(mongooseAutoPopulate)
 
 const Comment = model('Comment', commentSchema)
 
-commentSchema.post('remove', async function (doc) {
-  await Comment.remove({ _id: { $in: doc.replies } })
+commentSchema.post('remove', function (doc) {
+  Comment.remove({ _id: { $in: doc.replies } })
 })
 
 export default Comment
