@@ -21,8 +21,7 @@ app.use(cors(corsOptions))
 // connect to the database
 connectDb()
 
-//To parse the body of the request
-app.use(express.urlencoded({ extended: true }))
+//To parse json requests
 app.use(express.json())
 
 app.use(
