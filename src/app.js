@@ -18,9 +18,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
-// connect to the database
-connectDb()
-
 //To parse json requests
 app.use(express.json())
 
@@ -48,7 +45,9 @@ app.get('/', (req, res) => {
   res.json({ msg: 'Welcome to the Double Text API.' })
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  // connect to the database
+  await connectDb()
   console.log(`Server running on port ${port}.`.bgBlue)
 })
 
